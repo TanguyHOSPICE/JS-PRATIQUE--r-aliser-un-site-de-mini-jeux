@@ -65,10 +65,14 @@ function checkPropal() {
 		// console.log(`C'est trop`);
 		//8b-Injection
 		resultDiv.innerHTML = `C'est trop !`;
+		let audio = new Audio('audio/moins.mp3');
+		audio.play();
 	} else if (numberPropal < NumberToFind) {
 		// console.log(`C'est pas assez`);
 		//8c-Injection
 		resultDiv.innerHTML = `C'est pas assez !`;
+		let audio = new Audio('audio/plus.mp3');
+		audio.play();
 	} else if (numberPropal == NumberToFind) {
 		// console.log(`C'est GAGNE !`);
 		//8d-Injection
