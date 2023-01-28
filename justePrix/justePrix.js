@@ -29,6 +29,17 @@ gameStart.addEventListener('click', function () {
 
 //3b-Gérer clic sur btn
 checkPropalButton.addEventListener('click', function () {
+	//6a-Appel function checkPropal (après copie algo ,qui était à l'origine ici, ds la fonction)
+	checkPropal();
+});
+
+//2b
+function getRandomInt(max) {
+	return Math.floor(Math.random() * max);
+}
+
+//?6-Mise en place fonction vu algo fait
+function checkPropal() {
 	//?4-Récup Input + Elt taper
 	//4a-Bis-Récup valeur taper
 	let numberPropal = userPropalInput.value;
@@ -46,9 +57,4 @@ checkPropalButton.addEventListener('click', function () {
 
 		// userPropalInput.innerHTML = `C'est GAGNE !`;
 	}
-});
-
-//2b
-function getRandomInt(max) {
-	return Math.floor(Math.random() * max);
 }
