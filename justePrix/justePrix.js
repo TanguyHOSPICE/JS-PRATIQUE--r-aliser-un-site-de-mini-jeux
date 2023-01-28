@@ -8,11 +8,26 @@ const gameStart = document.getElementById('gameStart');
 const checkPropalButton = document.getElementById('checkPropalButton');
 const userPropalInput = document.getElementById('userPropalInput');
 const resultDiv = document.getElementById('resultDiv');
+const countdownDiv = document.getElementById('countDown');
 
 let NumberToFind = 0;
+let counterInterval = null;
+
 
 gameStart.addEventListener('click', function () {
 	NumberToFind = getRandomInt(100);
+	timeStamp = 10;
+
+	let counter = setInterval(() => {
+		resultDiv.innerHTML = timeStamp + ' seconde(s)';
+		timeStamp--;
+		counterInterval = setInterval(() => {
+			
+			resultDiv.innerHTML = timeStamp + ' seconde(s)';
+		if (timeStamp < 0) {
+			clearInterval(counter);
+		}
+	}, 1000);
 });
 
 checkPropalButton.addEventListener('click', function () {

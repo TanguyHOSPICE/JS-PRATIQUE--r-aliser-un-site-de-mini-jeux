@@ -23,6 +23,8 @@ console.log('============'); //!Provisoire
 let NumberToFind = 0;
 //9c-init var Tps restant
 let timeStamp = 0;
+//9h-compteur continu même si on re clic sur gameSart-déclare var
+let counterInterval = null;
 
 //?2-Attribuer une fonction au clic-Dc créer une var
 //?9-Mise en place cpt a rebours =>html:div countdown + var
@@ -37,14 +39,15 @@ gameStart.addEventListener('click', function () {
 	timeStamp = 10;
 	//9b-mise en place ds fonction setInterval fonction anonyme pr coutdown
 	//9f-setInterval effectue sont action toutes les 1000s dc nous on veut une boucle en récursive-J'attribut une var pr l'arrêt clearInterval
-	let compteur = setInterval(() => {
+	//9hBis-changement de var
+	counterInterval = setInterval(() => {
 		//console.log(timeStamp);//!Provisoire
 		//9g-on injecte le compteur
 		resultDiv.innerHTML = timeStamp + ' seconde(s)';
 		//9e-décrémentation
 		timeStamp--;
 		if (timeStamp < 0) {
-			clearInterval(compteur);
+			clearInterval(counter);
 		}
 	}, 1000);
 });
