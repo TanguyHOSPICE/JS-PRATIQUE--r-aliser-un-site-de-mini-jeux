@@ -12,14 +12,20 @@ const checkPropalButton = document.getElementById('checkPropalButton');
 //4a-Récup Input (pr elt taper)-je pointe l'elt
 const userPropalInput = document.getElementById('userPropalInput');
 //console.log(userPropalInput); //!Provisoire
-//8a-récup div
+//8a-récup div result
 const resultDiv = document.getElementById('resultDiv');
+//9b-récup div cpt a rebours
+const countdownDiv = document.getElementById('countDown');
+// console.log(countdownDiv); //!Provisoire
 console.log('============'); //!Provisoire
 
-//2c
+//2c-
 let NumberToFind = 0;
+//9c-init var Tps restant
+let timeStamp = 0;
 
 //?2-Attribuer une fonction au clic-Dc créer une var
+//?9-Mise en place cpt a rebours =>html:div countdown + var
 gameStart.addEventListener('click', function () {
 	//2a-Lancer la partie
 	//2b-Récupérer un chiffre aléatoire-cherche method Math.random-En integ le chiffre max
@@ -27,6 +33,14 @@ gameStart.addEventListener('click', function () {
 	//2b.2 on vérifie que cela marche
 	console.log(NumberToFind); //!Provisoire
 	//alert(NumberToFind);//!Provisoire
+	//9-d
+	timeStamp = 10;
+	//9b-mise en place ds fonction setTimeout fonction anonyme pr coutdown
+	// setTimeout(() => {
+	// 	console.log(timeStamp);
+	// 	//9e-décrémentation
+	// 	timeStamp--;
+	// }, 1000);
 });
 
 //3b-Gérer clic sur btn
@@ -79,3 +93,4 @@ function checkPropal() {
 		resultDiv.innerHTML = `C'est GAGNE !`;
 	}
 }
+//setTimeout effectue sont action toutes les 1000s dc nous on veut une boucle en récursive
