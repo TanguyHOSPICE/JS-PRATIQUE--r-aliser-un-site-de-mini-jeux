@@ -64,13 +64,13 @@ function checkPropal() {
 	if (numberPropal > NumberToFind) {
 		// console.log(`C'est trop`);
 		//8b-Injection
-		resultDiv.innerHTML = `C'est trop !`;
+		resultDiv.innerHTML = `C'est moins !`;
 		let audio = new Audio('audio/moins.mp3');
 		audio.play();
 	} else if (numberPropal < NumberToFind) {
 		// console.log(`C'est pas assez`);
 		//8c-Injection
-		resultDiv.innerHTML = `C'est pas assez !`;
+		resultDiv.innerHTML = `C'est plus !`;
 		let audio = new Audio('audio/plus.mp3');
 		audio.play();
 	} else if (numberPropal == NumberToFind) {

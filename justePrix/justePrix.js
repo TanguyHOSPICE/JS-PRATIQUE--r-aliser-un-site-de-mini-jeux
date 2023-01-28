@@ -33,9 +33,13 @@ function checkPropal() {
 	let numberPropal = userPropalInput.value;
 
 	if (numberPropal > NumberToFind) {
-		resultDiv.innerHTML = `C'est trop !`;
+		resultDiv.innerHTML = `C'est moins !`;
+		let audio = new Audio('audio/moins.mp3');
+		audio.play();
 	} else if (numberPropal < NumberToFind) {
-		resultDiv.innerHTML = `C'est pas assez !`;
+		resultDiv.innerHTML = `C'est plus !`;
+		let audio = new Audio('audio/plus.mp3');
+		audio.play();
 	} else if (numberPropal == NumberToFind) {
 		resultDiv.innerHTML = `C'est GAGNE !`;
 	}
