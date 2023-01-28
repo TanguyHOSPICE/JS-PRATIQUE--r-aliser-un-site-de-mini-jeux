@@ -35,12 +35,18 @@ gameStart.addEventListener('click', function () {
 	//alert(NumberToFind);//!Provisoire
 	//9-d
 	timeStamp = 10;
-	//9b-mise en place ds fonction setTimeout fonction anonyme pr coutdown
-	// setTimeout(() => {
-	// 	console.log(timeStamp);
-	// 	//9e-décrémentation
-	// 	timeStamp--;
-	// }, 1000);
+	//9b-mise en place ds fonction setInterval fonction anonyme pr coutdown
+	//9f-setInterval effectue sont action toutes les 1000s dc nous on veut une boucle en récursive-J'attribut une var pr l'arrêt clearInterval
+	let compteur = setInterval(() => {
+		//console.log(timeStamp);//!Provisoire
+		//9g-on injecte le compteur
+		resultDiv.innerHTML = timeStamp + ' seconde(s)';
+		//9e-décrémentation
+		timeStamp--;
+		if (timeStamp < 0) {
+			clearInterval(compteur);
+		}
+	}, 1000);
 });
 
 //3b-Gérer clic sur btn
@@ -93,4 +99,3 @@ function checkPropal() {
 		resultDiv.innerHTML = `C'est GAGNE !`;
 	}
 }
-//setTimeout effectue sont action toutes les 1000s dc nous on veut une boucle en récursive
