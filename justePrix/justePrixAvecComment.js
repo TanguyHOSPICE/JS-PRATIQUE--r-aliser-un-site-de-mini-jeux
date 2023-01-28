@@ -12,6 +12,8 @@ const checkPropalButton = document.getElementById('checkPropalButton');
 //4a-Récup Input (pr elt taper)-je pointe l'elt
 const userPropalInput = document.getElementById('userPropalInput');
 //console.log(userPropalInput); //!Provisoire
+//8a-récup div
+const resultDiv = document.getElementById('resultDiv');
 console.log('============'); //!Provisoire
 
 //2c
@@ -36,7 +38,9 @@ checkPropalButton.addEventListener('click', function () {
 //?7-Gérer validation du numberPropal par appui s/key-Param event
 userPropalInput.addEventListener('keyup', function (event) {
 	//7a-console.log(event);//==> event{key:'Enter'}
-	//console.log(event); //!Provisoire
+	//!Provisoire
+	// console.log(event);
+	// debugger;
 
 	//7-b
 	if (event.key === 'Enter') {
@@ -50,6 +54,7 @@ function getRandomInt(max) {
 }
 
 //?6-Mise en place fonction vu algo fait
+//?8-Résultats Conditions => Add HTML:div pr injections réponses
 function checkPropal() {
 	//?4-Récup Input + Elt taper
 	//4a-Bis-Récup valeur taper
@@ -57,15 +62,16 @@ function checkPropal() {
 	console.log(`Chiffre Tapé:${numberPropal}`);
 	//?5-Vérification conditions
 	if (numberPropal > NumberToFind) {
-		console.log(`C'est trop`);
-		// userPropalInput.innerHTML = `C'est trop`;
+		// console.log(`C'est trop`);
+		//8b-Injection
+		resultDiv.innerHTML = `C'est trop !`;
 	} else if (numberPropal < NumberToFind) {
-		console.log(`C'est pas assez`);
-
-		// userPropalInput.innerHTML = `C'est pas assez`;
+		// console.log(`C'est pas assez`);
+		//8c-Injection
+		resultDiv.innerHTML = `C'est pas assez !`;
 	} else if (numberPropal == NumberToFind) {
-		console.log(`C'est GAGNE !`);
-
-		// userPropalInput.innerHTML = `C'est GAGNE !`;
+		// console.log(`C'est GAGNE !`);
+		//8d-Injection
+		resultDiv.innerHTML = `C'est GAGNE !`;
 	}
 }
