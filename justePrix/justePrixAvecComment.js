@@ -33,6 +33,17 @@ checkPropalButton.addEventListener('click', function () {
 	checkPropal();
 });
 
+//?7-Gérer validation du numberPropal par appui s/key-Param event
+userPropalInput.addEventListener('keyup', function (event) {
+	//7a-console.log(event);//==> event{key:'Enter'}
+	//console.log(event); //!Provisoire
+
+	//7-b
+	if (event.key === 'Enter') {
+		checkPropal();
+	}
+	//6a-Appel function checkPropal (après copie algo ,qui était à l'origine ici, ds la fonction)
+});
 //2b
 function getRandomInt(max) {
 	return Math.floor(Math.random() * max);
