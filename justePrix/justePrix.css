@@ -36,3 +36,19 @@ body {
 	animation: suspens 1s infinite;
 	padding: 7px 15px;
 }
+
+@keyframes suspens {
+	0%,
+	100% {
+		transform: rotate(0deg);
+		font-size: 20px;
+	}
+	33% {
+		transform: rotate(-30deg);
+		font-size: 23px;
+	}
+	66% {
+		transform: rotate(30deg);
+		font-size: 23px;
+	}
+}
