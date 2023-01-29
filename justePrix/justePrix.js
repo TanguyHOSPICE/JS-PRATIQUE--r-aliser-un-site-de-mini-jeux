@@ -15,32 +15,6 @@ let counterInterval = null;
 
 gameStart.addEventListener('click', function () {
 	NumberToFind = getRandomInt(100);
-	timeStamp = 30;
-	if (counterInterval != null) {
-		clearInterval(counterInterval);
-	}
-
-	counterInterval = setInterval(() => {
-		countdownDiv.innerHTML = timeStamp + ' seconde(s)';
-		timeStamp--;
-
-		if (timeStamp >= 20) {
-			countdownDiv.classList.remove('warning');
-			countdownDiv.classList.remove('danger');
-			countdownDiv.classList.add('cool');
-		} else if (timeStamp > 10) {
-			countdownDiv.classList.remove('cool');
-			countdownDiv.classList.remove('danger');
-			countdownDiv.classList.add('warning');
-		} else if (timeStamp >= 0) {
-			countdownDiv.classList.remove('cool');
-			countdownDiv.classList.remove('warning');
-			countdownDiv.classList.add('danger');
-		} else if (timeStamp < 0) {
-			clearInterval(counterInterval);
-			// endGame(false);
-		}
-	}, 1000);
 });
 
 checkPropalButton.addEventListener('click', function () {
@@ -71,4 +45,33 @@ function checkPropal() {
 	} else if (numberPropal == NumberToFind) {
 		resultDiv.innerHTML = `C'est GAGNE !`;
 	}
+}
+
+function launchGame() {
+	timeStamp = 30;
+	if (counterInterval != null) {
+		clearInterval(counterInterval);
+	}
+
+	counterInterval = setInterval(() => {
+		countdownDiv.innerHTML = timeStamp + ' seconde(s)';
+		timeStamp--;
+
+		if (timeStamp >= 20) {
+			countdownDiv.classList.remove('warning');
+			countdownDiv.classList.remove('danger');
+			countdownDiv.classList.add('cool');
+		} else if (timeStamp > 10) {
+			countdownDiv.classList.remove('cool');
+			countdownDiv.classList.remove('danger');
+			countdownDiv.classList.add('warning');
+		} else if (timeStamp >= 0) {
+			countdownDiv.classList.remove('cool');
+			countdownDiv.classList.remove('warning');
+			countdownDiv.classList.add('danger');
+		} else if (timeStamp < 0) {
+			clearInterval(counterInterval);
+			// endGame(false);
+		}
+	}, 1000);
 }
