@@ -13,19 +13,32 @@ const countdownDiv = document.getElementById('countDown');
 let NumberToFind = 0;
 let counterInterval = null;
 
-
 gameStart.addEventListener('click', function () {
 	NumberToFind = getRandomInt(100);
-	timeStamp = 10;
+	timeStamp = 30;
+	if (counterInterval != null) {
+		clearInterval(counterInterval);
+	}
 
-	let counter = setInterval(() => {
-		resultDiv.innerHTML = timeStamp + ' seconde(s)';
+	counterInterval = setInterval(() => {
+		countdownDiv.innerHTML = timeStamp + ' seconde(s)';
 		timeStamp--;
-		counterInterval = setInterval(() => {
-			
-			resultDiv.innerHTML = timeStamp + ' seconde(s)';
-		if (timeStamp < 0) {
-			clearInterval(counter);
+
+		if (timeStamp >= 20) {
+			countdownDiv.classList.remove('warning');
+			countdownDiv.classList.remove('danger');
+			countdownDiv.classList.add('cool');
+		} else if (timeStamp > 10) {
+			countdownDiv.classList.remove('cool');
+			countdownDiv.classList.remove('danger');
+			countdownDiv.classList.add('warning');
+		} else if (timeStamp >= 0) {
+			countdownDiv.classList.remove('cool');
+			countdownDiv.classList.remove('warning');
+			countdownDiv.classList.add('danger');
+		} else if (timeStamp < 0) {
+			clearInterval(counterInterval);
+			// endGame(false);
 		}
 	}, 1000);
 });

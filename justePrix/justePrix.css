@@ -12,3 +12,27 @@ body {
 	font-weight: 700;
 	letter-spacing: 2px;
 }
+
+.countdownDiv {
+	transition: 0.2s;
+	font-size: 20px;
+	display: inline-block;
+	color: white;
+	border-radius: 35px;
+	padding: 15px;
+	font-weight: bold;
+}
+
+.countdownDiv.cool {
+	background-color: #f5af19;
+}
+
+.countdownDiv.warning {
+	background-color: #f25b14;
+}
+
+.countdownDiv.danger {
+	background-color: red;
+	animation: suspens 1s infinite;
+	padding: 7px 15px;
+}

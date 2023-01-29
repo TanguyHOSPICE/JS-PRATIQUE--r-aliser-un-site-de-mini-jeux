@@ -33,21 +33,40 @@ gameStart.addEventListener('click', function () {
 	//2b-Récupérer un chiffre aléatoire-cherche method Math.random-En integ le chiffre max
 	NumberToFind = getRandomInt(100);
 	//2b.2 on vérifie que cela marche
-	console.log(NumberToFind); //!Provisoire
+	//console.log(NumberToFind); //!Provisoire
 	//alert(NumberToFind);//!Provisoire
 	//9-d
-	timeStamp = 10;
+	timeStamp = 30;
+	//9i-On interrompe le compteur selon la condition (relance au click gameStart)
+	if (counterInterval != null) {
+		clearInterval(counterInterval);
+	}
 	//9b-mise en place ds fonction setInterval fonction anonyme pr coutdown
 	//9f-setInterval effectue sont action toutes les 1000s dc nous on veut une boucle en récursive-J'attribut une var pr l'arrêt clearInterval
 	//9hBis-changement de var
 	counterInterval = setInterval(() => {
 		//console.log(timeStamp);//!Provisoire
 		//9g-on injecte le compteur
-		resultDiv.innerHTML = timeStamp + ' seconde(s)';
+		countdownDiv.innerText = timeStamp + ' seconde(s)';
 		//9e-décrémentation
 		timeStamp--;
-		if (timeStamp < 0) {
-			clearInterval(counter);
+		//9eBis-On interrompe le compteur selon la condition (else if)
+		//?10-inject & remove  alerte -add css
+		if (timeStamp >= 20) {
+			countdownDiv.classList.remove('warning');
+			countdownDiv.classList.remove('danger');
+			countdownDiv.classList.add('cool');
+		} else if (timeStamp > 10) {
+			countdownDiv.classList.remove('cool');
+			countdownDiv.classList.remove('danger');
+			countdownDiv.classList.add('warning');
+		} else if (timeStamp >= 0) {
+			countdownDiv.classList.remove('cool');
+			countdownDiv.classList.remove('warning');
+			countdownDiv.classList.add('danger');
+		} else if (timeStamp < 0) {
+			clearInterval(counterInterval);
+			// endGame(false);
 		}
 	}, 1000);
 });
