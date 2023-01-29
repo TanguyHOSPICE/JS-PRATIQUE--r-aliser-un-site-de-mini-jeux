@@ -9,12 +9,13 @@ const checkPropalButton = document.getElementById('checkPropalButton');
 const userPropalInput = document.getElementById('userPropalInput');
 const resultDiv = document.getElementById('resultDiv');
 const countdownDiv = document.getElementById('countDown');
+const gamePropalDiv = document.getElementById('gamePropalDiv');
 
 let NumberToFind = 0;
 let counterInterval = null;
 
 gameStart.addEventListener('click', function () {
-	NumberToFind = getRandomInt(100);
+	launchGame();
 });
 
 checkPropalButton.addEventListener('click', function () {
@@ -48,7 +49,9 @@ function checkPropal() {
 }
 
 function launchGame() {
+	NumberToFind = getRandomInt(100);
 	timeStamp = 30;
+	gamePropalDiv.style.display = 'block';
 	if (counterInterval != null) {
 		clearInterval(counterInterval);
 	}
@@ -71,7 +74,12 @@ function launchGame() {
 			countdownDiv.classList.add('danger');
 		} else if (timeStamp < 0) {
 			clearInterval(counterInterval);
-			// endGame(false);
+			endGame(false);
 		}
 	}, 1000);
+}
+
+function endGame() {
+	//12d-Disparition de l'input du userPropalInput
+	gamePropalDiv.style.display = 'none';
 }

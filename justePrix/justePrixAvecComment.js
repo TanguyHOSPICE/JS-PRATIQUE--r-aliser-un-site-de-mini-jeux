@@ -17,6 +17,8 @@ const resultDiv = document.getElementById('resultDiv');
 //9b-récup div cpt a rebours
 const countdownDiv = document.getElementById('countDown');
 // console.log(countdownDiv); //!Provisoire
+//12b-récup div de lancement
+const gamePropalDiv = document.getElementById('gamePropalDiv');
 console.log('============'); //!Provisoire
 
 //2c-
@@ -29,10 +31,6 @@ let counterInterval = null;
 //?2-Attribuer une fonction au clic-Dc créer une var
 //?9-Mise en place cpt a rebours =>html:div countdown + var
 gameStart.addEventListener('click', function () {
-	//2a-Lancer la partie
-	//2b-Récupérer un chiffre aléatoire-cherche method Math.random-En integ le chiffre max
-	NumberToFind = getRandomInt(100);
-	//2b.2 on vérifie que cela marche
 	//console.log(NumberToFind); //!Provisoire
 	//alert(NumberToFind);//!Provisoire
 	//11a-Appel de la fonction launchGame
@@ -91,8 +89,14 @@ function checkPropal() {
 }
 //?11-mise en place lancement partie(compteur...)
 function launchGame() {
+	//2a-Lancer la partie
+	//2b-Récupérer un chiffre aléatoire-cherche method Math.random-En integ le chiffre max
+	NumberToFind = getRandomInt(100);
+	//2b.2 on vérifie que cela marche
 	//9-d
 	timeStamp = 30;
+	//12c-Apparition de l'input pr userPropalInput
+	gamePropalDiv.style.display = 'block';
 	//9i-On interrompe le compteur selon la condition (relance au click gameStart)
 	if (counterInterval != null) {
 		clearInterval(counterInterval);
@@ -103,7 +107,7 @@ function launchGame() {
 	counterInterval = setInterval(() => {
 		//console.log(timeStamp);//!Provisoire
 		//9g-on injecte le compteur
-		countdownDiv.innerText = timeStamp + ' seconde(s)';
+		countdownDiv.innerText = timeStamp + ' (s)';
 		//9e-décrémentation
 		timeStamp--;
 		//9eBis-On interrompe le compteur selon la condition (else if)
@@ -122,7 +126,13 @@ function launchGame() {
 			countdownDiv.classList.add('danger');
 		} else if (timeStamp < 0) {
 			clearInterval(counterInterval);
-			// endGame(false);
+			//12a-fin de partie
+			endGame(false);
 		}
 	}, 1000);
+}
+//?12-mise en place fin de partie(Appeler ds launchGame)
+function endGame() {
+	//12d-Disparition de l'input du userPropalInput
+	gamePropalDiv.style.display = 'none';
 }

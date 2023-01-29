@@ -3,6 +3,7 @@ body {
 	height: 90vh;
 	background: url(/justePrix/Img/Flambe.jpg) center/cover no-repeat;
 }
+
 #gameStart {
 	background: #f12711; /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, #f5af19, #f12711); /* Chrome 10-25, Safari 5.1-6 */
@@ -12,7 +13,7 @@ body {
 	font-weight: 700;
 	letter-spacing: 2px;
 }
-
+/* ************Counter*************** */
 .countdownDiv {
 	transition: 0.2s;
 	font-size: 20px;
@@ -37,6 +38,12 @@ body {
 	padding: 7px 15px;
 }
 
+/* ************Input*************** */
+#gamePropalDiv {
+	display: none;
+}
+
+/* ************Animation*************** */
 @keyframes suspens {
 	0%,
 	100% {
