@@ -1,0 +1,17 @@
+.confetti {
+	width: 10px;
+	height: 20px;
+	background-color: red;
+	animation: falling 5s;
+	position: absolute;
+}
+@keyframes falling {
+	0% {
+		top: 0;
+		rotate: 10deg;
+	}
+	100% {
+		top: 110%;
+		rotate: 360deg;
+	}
+}
