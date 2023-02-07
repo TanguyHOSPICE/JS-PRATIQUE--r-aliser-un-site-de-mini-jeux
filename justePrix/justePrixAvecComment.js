@@ -136,3 +136,5 @@ function endGame() {
 	//12d-Disparition de l'input du userPropalInput
 	gamePropalDiv.style.display = 'none';
 }
+
+//test comment
