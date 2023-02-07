@@ -137,4 +137,4 @@ function endGame() {
 	gamePropalDiv.style.display = 'none';
 }
 
-//test comment re
+//encore
