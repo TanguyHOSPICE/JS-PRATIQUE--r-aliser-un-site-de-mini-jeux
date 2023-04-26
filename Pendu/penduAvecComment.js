@@ -1,0 +1,99 @@
+/*
+TODO #4:
+  -Générer 1 mot aléatoire
+  -Afficher le mot à deviner en masqué_ _ _ _ _ _
+  -Pouvoir proposer des lettres
+  -Afficher les lettres proposées/trouvées
+  -Gérer le nb d'erreurs max
+*/
+//import des librairies
+import { Utils } from '../Lib/Utils/utils.js';
+
+//1-Déclarer var pour démarrer le jeu
+const btnPlay = document.getElementById('beginGame');
+//2-Déclarer var qui est un tableau de mots
+//(idéal aurait été de récupérer un fichier externe :API générateur de mots fr ou librairie de mots)
+const allWords = [
+	'pomme',
+	'banane',
+	'orange',
+	'fraise',
+	'melon',
+	'poire',
+	'cerise',
+	'raisin',
+	'mangue',
+	'kiwi',
+	'ananas',
+	'pasteque',
+	'framboise',
+	'cassis',
+	'abricot',
+	'prune',
+	'peche',
+	'nectarine',
+	'pamplemousse',
+	'citron',
+	'noix',
+	'noisette',
+	'amande',
+];
+const wordToFindDiv = document.getElementById('wordToFindDiv'); //4b
+
+let wordToFind; // 4a-
+let wordToFindArray = []; //4c
+
+//3-eventListener sur le bouton pour démarrer le jeu
+btnPlay.addEventListener('click', function () {
+	beginGame();
+});
+
+//4-fonction qui va démarrer le jeu
+function beginGame() {
+	//4e- Réinitialiser le div qui va contenir le mot à trouver
+	wordToFindDiv.innerHTML = '';
+	// 4a- Déclarer var qui va contenir le mot à trouver
+	wordToFind = generateWord();
+	console.log(wordToFind); //TODO: à supprimer
+	//4b- Afficher le mot à deviner
+	//wordToFindDiv.innerHTML = wordToFind; //TODO: à supprimer après avoir fait la fonction 4d
+	//4c- tranformer mon mot (wordToFind) en 1 tableau qui va contenir les lettres trouvées
+	//wordToFindArray = wordToFind.split('');
+	// OU
+	wordToFindArray = Array.from(wordToFind);
+	// OU wordToFindArray = [...wordToFind];
+	//console.log(wordToFindArray); //TODO: à supprimer
+
+	//4d-
+	//4d-1- Déclarer une table qui crée un élts qui va contenir les lettres trouvées
+	let table = document.createElement('table');
+	//4d-2- Déclarer une ligne, Elt de la table
+	let line = document.createElement('tr');
+
+	//4d-3- Boucle qui va parcourir le tableau et afficher les lettres trouvées
+	wordToFindArray.forEach((letter) => {
+		//4d-3-a- Déclarer une cellule (td = case de la table) par lettre
+		let td = document.createElement('td');
+		//4d-3-b- Ajouter une propriété à la cellule qui va contenir la lettre
+		td.dataset.letter = letter;
+		//4d-3-c- Afficher la lettre trouvée en masqué
+		td.innerText = '_';
+		//4d-3-d- Ajouter la cellule à la ligne
+		line.appendChild(td);
+	});
+	console.log(wordToFindArray); //TODO: à supprimer
+	//4d-2-e Ajouter la ligne à la table
+	table.appendChild(line);
+	//4d-2-f Ajouter la table au div
+	wordToFindDiv.appendChild(table);
+}
+
+//5- function: Generer mot aléatoire
+function generateWord() {
+	//5b(6)- déclarer var qui va contenir le mot aléatoire : allWords.length = longueur du tableau
+	let indexWord = Utils.getRandomInt(allWords.length);
+	//5a-Doit retourner un mot aléatoire
+	return allWords[indexWord];
+}
+
+//6- function: récup entier aléatoire => importé de utils.js
