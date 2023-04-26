@@ -1,7 +1,7 @@
 /*
 TODO #4:
-  -Générer 1 mot aléatoire
-  -Afficher le mot à deviner en masqué_ _ _ _ _ _
+  X-Générer 1 mot aléatoire
+  X-Afficher le mot à deviner en masqué_ _ _ _ _ _
   -Pouvoir proposer des lettres
   -Afficher les lettres proposées/trouvées
   -Gérer le nb d'erreurs max
@@ -48,7 +48,41 @@ btnPlay.addEventListener('click', function () {
 	beginGame();
 });
 
-//4-fonction qui va démarrer le jeu
+//7- function: Générer 1 clavier
+function generateKeyBoard() {}
+
+//8- function: Générer l'alphabet
+function generateAlphabet(capital = false) {
+	//8- Retourne un tbl de 26 lettres qui va récupérer les lettres ave code ASCII
+	//return [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97)));//8-a-
+
+	// OU
+	//8-b-
+	let tab = [];
+	/* for (let i = 0; i < 26; i++) {
+		if (capital) {
+			tab.push(String.fromCharCode(i + 65));
+		} else {
+			tab.push(String.fromCharCode(i + 97));
+		}
+	} //+ return tab;
+  */
+	// OU
+	//8-c-
+	let i = 65;
+	if (!capital) {
+		i += 32;
+	}
+
+	let finish = i + 26;
+	for (i; i < finish; i++) {
+		tab.push(String.fromCharCode(i));
+	}
+
+	return tab;
+}
+
+//4- fonction : Démarrer le jeu
 function beginGame() {
 	//4e- Réinitialiser le div qui va contenir le mot à trouver
 	wordToFindDiv.innerHTML = '';
@@ -74,14 +108,15 @@ function beginGame() {
 	wordToFindArray.forEach((letter) => {
 		//4d-3-a- Déclarer une cellule (td = case de la table) par lettre
 		let td = document.createElement('td');
-		//4d-3-b- Ajouter une propriété à la cellule qui va contenir la lettre
+		//4d-3-b- Ajouter une propriété à la cellule qui va contenir la lettre (utilisation des data attributs)
+		//? https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes#javascript_access
 		td.dataset.letter = letter;
 		//4d-3-c- Afficher la lettre trouvée en masqué
 		td.innerText = '_';
 		//4d-3-d- Ajouter la cellule à la ligne
 		line.appendChild(td);
 	});
-	console.log(wordToFindArray); //TODO: à supprimer
+	//console.log(wordToFindArray); //TODO: à supprimer
 	//4d-2-e Ajouter la ligne à la table
 	table.appendChild(line);
 	//4d-2-f Ajouter la table au div
@@ -96,4 +131,4 @@ function generateWord() {
 	return allWords[indexWord];
 }
 
-//6- function: récup entier aléatoire => importé de utils.js
+//6- function: récup entier aléatoire (=> importé de utils.js)
