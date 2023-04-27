@@ -43,64 +43,17 @@ const KeyBoardDiv = document.getElementById('KeyBoard'); //8b
 
 let wordToFind; // 4a-
 let wordToFindArray = []; //4c
+let cptErreur = 0; //8d
 
 //3-eventListener sur le bouton pour démarrer le jeu
 btnPlay.addEventListener('click', function () {
 	initGame();
 });
 
-//8- function: Générer 1 clavier
-function generateKeyBoard() {
-	//8-c- Réinitialiser le div qui va contenir le clavier
-	KeyBoardDiv.innerHTML = '';
-	//8-a- Déclarer var qui va contenir l'alphabet
-	let Alphabet = generateAlphabet();
-	//8-b- boucle qui va parcourir l'alphabet et afficher les lettres
-	Alphabet.forEach((letter) => {
-		//8-b-1- Déclarer un div qui va contenir la lettre
-		let lettreDiv = document.createElement('div');
-		//8-b-2- Ajouter la lettre au div
-		lettreDiv.innerHTML = letter;
-		//8-b-3- Ajouter une classe au div
-		lettreDiv.classList.add('letterKeyBoard');
-		//8-b-4- Ajouter le div au div qui contient le clavier
-		KeyBoardDiv.appendChild(lettreDiv);
-	});
-}
-
-//7- function: Générer l'alphabet
-function generateAlphabet(capital = false) {
-	//7- Retourne un tbl de 26 lettres qui va récupérer les lettres ave code ASCII
-	//return [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97)));//7-a-
-
-	// OU
-	//7-b-
-	let tab = [];
-	/* for (let i = 0; i < 26; i++) {
-		if (capital) {
-			tab.push(String.fromCharCode(i + 65));
-		} else {
-			tab.push(String.fromCharCode(i + 97));
-		}
-	} //+ return tab;
-  */
-	// OU
-	//7-c-
-	let i = 65;
-	if (!capital) {
-		i += 32;
-	}
-
-	let finish = i + 26; //Comme le i s'incrémente il faut lui donner une valeur de "fin"
-	for (i; i < finish; i++) {
-		tab.push(String.fromCharCode(i));
-	}
-
-	return tab;
-}
-
 //4- fonction : Démarrer le jeu
 function initGame() {
+	//4g(8d)- Réinitialiser le compteur d'erreur
+	cptErreur = 0;
 	//4e- Réinitialiser le div qui va contenir le mot à trouver
 	wordToFindDiv.innerHTML = '';
 	// 4a- Déclarer var qui va contenir le mot à trouver
@@ -152,3 +105,86 @@ function generateWord() {
 }
 
 //6- function: récup entier aléatoire (=> importé de utils.js)
+
+//7- function: Générer l'alphabet
+function generateAlphabet(capital = false) {
+	//7- Retourne un tbl de 26 lettres qui va récupérer les lettres ave code ASCII
+	//return [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97)));//7-a-
+
+	// OU
+	//7-b-
+	let tab = [];
+	/* for (let i = 0; i < 26; i++) {
+		if (capital) {
+			tab.push(String.fromCharCode(i + 65));
+		} else {
+			tab.push(String.fromCharCode(i + 97));
+		}
+	} //+ return tab;
+  */
+	// OU
+	//7-c-
+	let i = 65;
+	if (!capital) {
+		i += 32;
+	}
+
+	let finish = i + 26; //Comme le i s'incrémente il faut lui donner une valeur de "fin"
+	for (i; i < finish; i++) {
+		tab.push(String.fromCharCode(i));
+	}
+
+	return tab;
+}
+
+//8- function: Générer 1 clavier
+function generateKeyBoard() {
+	//8-c- Réinitialiser le div qui va contenir le clavier
+	KeyBoardDiv.innerHTML = '';
+	//8-a- Déclarer var qui va contenir l'alphabet
+	let Alphabet = generateAlphabet();
+	//8-b- boucle qui va parcourir l'alphabet et afficher les lettres
+	Alphabet.forEach((letter) => {
+		//8-b-1- Déclarer un div qui va contenir la lettre
+		let lettreDiv = document.createElement('div');
+		//8-b-2- Ajouter la lettre au div
+		lettreDiv.innerHTML = letter;
+		//8-b-3- Ajouter une classe au div
+		lettreDiv.classList.add('letterKeyBoard');
+		//8-b-4- Ajouter le div au div qui contient le clavier
+		KeyBoardDiv.appendChild(lettreDiv);
+
+		//8-d(9)- Appeler la fonction qui va gérer les clicks sur chaques lettres cliquées
+		lettreDiv.addEventListener('click', () => {
+			//8-d-1- Vérifier si la lettre est dans le mot
+			if (checkLetterInWord(letter)) {
+				//8-d-2- Si oui, afficher la lettre dans le mot
+			} else {
+				//8-d-3- Si non, afficher le pendu => incrémenter le compteur d'erreurs
+				//8-d-5- Incrémenter le compteur d'erreurs
+				cptErreur++;
+				//8-d-6- Afficher ds le span le compteur d'erreurs
+				document.getElementById('cptErreur').innerHTML = cptErreur;
+			}
+			//8-d-4- Masquer la lettre cliquée
+			lettreDiv.style.visibility = 'hidden';
+		});
+	});
+}
+
+//9- function: Vérifier si la lettre est dans le mot
+function checkLetterInWord(letter) {
+	//9-a-2- Déclarer var qui va définir la lettre à trouver comme non trouvée
+	let findLetter = false;
+	//9-a- Pr chaque lettre du mot à trouver, la lettre en paramètre est dans la liste des lettres du mot à trouver
+	wordToFindArray.forEach((letterOfWord) => {
+		if (letter === letterOfWord) {
+			//9-a-1-
+			//alert('trouvé'); //TODO: à supprimer quand on aura vérifié les clicks 8-d(9)
+			//9-a-3- Déclarer findletter true
+			findLetter = true;
+		}
+	});
+	//9-a-4- Retourner false pr sortir de la fonction
+	return findLetter;
+}
