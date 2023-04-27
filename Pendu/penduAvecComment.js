@@ -39,18 +39,20 @@ const allWords = [
 	'amande',
 ];
 const wordToFindDiv = document.getElementById('wordToFindDiv'); //4b
-const KeyBoardDiv = document.getElementById('KeyBoardDiv'); //8b
+const KeyBoardDiv = document.getElementById('KeyBoard'); //8b
 
 let wordToFind; // 4a-
 let wordToFindArray = []; //4c
 
 //3-eventListener sur le bouton pour démarrer le jeu
 btnPlay.addEventListener('click', function () {
-	beginGame();
+	initGame();
 });
 
 //8- function: Générer 1 clavier
 function generateKeyBoard() {
+	//8-c- Réinitialiser le div qui va contenir le clavier
+	KeyBoardDiv.innerHTML = '';
 	//8-a- Déclarer var qui va contenir l'alphabet
 	let Alphabet = generateAlphabet();
 	//8-b- boucle qui va parcourir l'alphabet et afficher les lettres
@@ -98,7 +100,7 @@ function generateAlphabet(capital = false) {
 }
 
 //4- fonction : Démarrer le jeu
-function beginGame() {
+function initGame() {
 	//4e- Réinitialiser le div qui va contenir le mot à trouver
 	wordToFindDiv.innerHTML = '';
 	// 4a- Déclarer var qui va contenir le mot à trouver
