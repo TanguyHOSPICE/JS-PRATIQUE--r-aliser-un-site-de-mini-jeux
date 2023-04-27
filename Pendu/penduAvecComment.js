@@ -39,6 +39,7 @@ const allWords = [
 	'amande',
 ];
 const wordToFindDiv = document.getElementById('wordToFindDiv'); //4b
+const KeyBoardDiv = document.getElementById('KeyBoardDiv'); //8b
 
 let wordToFind; // 4a-
 let wordToFindArray = []; //4c
@@ -48,16 +49,30 @@ btnPlay.addEventListener('click', function () {
 	beginGame();
 });
 
-//7- function: Générer 1 clavier
-function generateKeyBoard() {}
+//8- function: Générer 1 clavier
+function generateKeyBoard() {
+	//8-a- Déclarer var qui va contenir l'alphabet
+	let Alphabet = generateAlphabet();
+	//8-b- boucle qui va parcourir l'alphabet et afficher les lettres
+	Alphabet.forEach((letter) => {
+		//8-b-1- Déclarer un div qui va contenir la lettre
+		let lettreDiv = document.createElement('div');
+		//8-b-2- Ajouter la lettre au div
+		lettreDiv.innerHTML = letter;
+		//8-b-3- Ajouter une classe au div
+		lettreDiv.classList.add('letterKeyBoard');
+		//8-b-4- Ajouter le div au div qui contient le clavier
+		KeyBoardDiv.appendChild(lettreDiv);
+	});
+}
 
-//8- function: Générer l'alphabet
+//7- function: Générer l'alphabet
 function generateAlphabet(capital = false) {
-	//8- Retourne un tbl de 26 lettres qui va récupérer les lettres ave code ASCII
-	//return [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97)));//8-a-
+	//7- Retourne un tbl de 26 lettres qui va récupérer les lettres ave code ASCII
+	//return [...Array(26)].map((_, i) => String.fromCharCode(i + (capital ? 65 : 97)));//7-a-
 
 	// OU
-	//8-b-
+	//7-b-
 	let tab = [];
 	/* for (let i = 0; i < 26; i++) {
 		if (capital) {
@@ -68,13 +83,13 @@ function generateAlphabet(capital = false) {
 	} //+ return tab;
   */
 	// OU
-	//8-c-
+	//7-c-
 	let i = 65;
 	if (!capital) {
 		i += 32;
 	}
 
-	let finish = i + 26;
+	let finish = i + 26; //Comme le i s'incrémente il faut lui donner une valeur de "fin"
 	for (i; i < finish; i++) {
 		tab.push(String.fromCharCode(i));
 	}
@@ -121,6 +136,9 @@ function beginGame() {
 	table.appendChild(line);
 	//4d-2-f Ajouter la table au div
 	wordToFindDiv.appendChild(table);
+
+	//4f(8)- Appeler la fonction qui va générer le clavier
+	generateKeyBoard();
 }
 
 //5- function: Generer mot aléatoire
