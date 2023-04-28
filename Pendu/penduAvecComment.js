@@ -1,11 +1,11 @@
 /*
-TODO #4:
+TODO :
   X-Générer 1 mot aléatoire
   X-Afficher le mot à deviner en masqué_ _ _ _ _ _
   X-Pouvoir proposer des lettres
   X-Afficher les lettres proposées/trouvées
   X-Gérer le nb d'erreurs max
-  -Gérer la victoire
+  X-Gérer la victoire
   
 */
 //import des librairies
