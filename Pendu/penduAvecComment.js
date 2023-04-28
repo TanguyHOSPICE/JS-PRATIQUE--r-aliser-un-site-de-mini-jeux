@@ -73,6 +73,8 @@ function initGame() {
 	let table = document.createElement('table');
 	//4d-2- Déclarer une ligne, Elt de la table
 	let line = document.createElement('tr');
+	//4h(8d-2)- Ajouter un id à la ligne qui va contenir/afficher le mot à trouver
+	line.id = 'LineOfWord';
 
 	//4d-3- Boucle qui va parcourir le tableau et afficher les lettres trouvées
 	wordToFindArray.forEach((letter) => {
@@ -159,6 +161,17 @@ function generateKeyBoard() {
 			//8-d-1- Vérifier si la lettre est dans le mot
 			if (checkLetterInWord(letter)) {
 				//8-d-2- Si oui, afficher la lettre dans le mot
+				let lineWord = document.getElementById('LineOfWord');
+				//8-d-7- On récupère ts les td de la ligne qui contient le mot à trouver
+				let allTdOfWord = lineWord.children;
+				//8-d-8- On parcourt ts les td de la ligne qui contient le mot à trouver
+				Array.from(allTdOfWord).forEach((td) => {
+					//8-d-9- Si la lettre cliquée est égale à la lettre du mot à trouver
+					if (td.dataset.letter == letter) {
+						//8-d-10- On affiche la lettre ds le mot
+						td.innerHTML = letter;
+					}
+				});
 			} else {
 				//8-d-3- Si non, afficher le pendu => incrémenter le compteur d'erreurs
 				//8-d-5- Incrémenter le compteur d'erreurs
