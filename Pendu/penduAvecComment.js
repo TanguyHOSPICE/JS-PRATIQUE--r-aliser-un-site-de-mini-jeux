@@ -160,11 +160,12 @@ function generateKeyBoard() {
 		lettreDiv.addEventListener('click', () => {
 			//8-d-1- Vérifier si la lettre est dans le mot
 			if (checkLetterInWord(letter)) {
+				//v-----------------------------v//
 				//8-d-2- Si oui, afficher la lettre dans le mot
 				let lineWord = document.getElementById('LineOfWord');
 				//8-d-7- On récupère ts les td de la ligne qui contient le mot à trouver
 				let allTdOfWord = lineWord.children;
-				//8-d-8- On parcourt ts les td de la ligne qui contient le mot à trouver
+				//8-d-8- On tansforme la ligne en tableau pour pouvoir utiliser forEach dessus (car on ne peut pas utiliser forEach sur un HTMLCollection) => https://developer.mozilla.org/fr/docs/Web/API/HTMLCollection => https://developer.mozilla.org/fr/docs/Web/API/Element/children
 				Array.from(allTdOfWord).forEach((td) => {
 					//8-d-9- Si la lettre cliquée est égale à la lettre du mot à trouver
 					if (td.dataset.letter == letter) {
@@ -172,12 +173,30 @@ function generateKeyBoard() {
 						td.innerHTML = letter;
 					}
 				});
+				//E-----------------------------E//
 			} else {
 				//8-d-3- Si non, afficher le pendu => incrémenter le compteur d'erreurs
 				//8-d-5- Incrémenter le compteur d'erreurs
 				cptErreur++;
 				//8-d-6- Afficher ds le span le compteur d'erreurs
 				document.getElementById('cptErreur').innerHTML = cptErreur;
+				//8-d-11- On gère le nombre d'erreurs
+				if (cptErreur >= 4) {
+					//8-d-12- Si le compteur d'erreurs est supérieur ou égal à 4, on affiche le message de défaite
+					document.getElementById('cptErreur').innerHTML =
+						'Perdu, vous avez fait plus de 4 erreurs.';
+					//v-----------------------------v//
+					//8-d-13- On affiche le mot à trouver
+					let lineWord = document.getElementById('LineOfWord');
+					let allTdOfWord = lineWord.children;
+
+					Array.from(allTdOfWord).forEach((td) => {
+						if (td.dataset.letter == letter) {
+							td.innerHTML = td.dataset.letter;
+						}
+					});
+					//E-----------------------------E//
+				}
 			}
 			//8-d-4- Masquer la lettre cliquée
 			lettreDiv.style.visibility = 'hidden';
