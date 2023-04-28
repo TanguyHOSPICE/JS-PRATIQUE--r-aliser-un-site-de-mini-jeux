@@ -44,6 +44,7 @@ const allWords = [
 const wordToFindDiv = document.getElementById('wordToFindDiv'); //4b
 const KeyBoardDiv = document.getElementById('KeyBoard'); //8b
 const cptErreurDiv = document.getElementById('cptErreur'); //8d-16
+const imgPendu = document.getElementById('imagePendu'); //10
 
 let wordToFind; // 4a-
 let wordToFindArray = []; //4c
@@ -63,6 +64,10 @@ function initGame() {
 	cptErreur = 0;
 	//4g(8d-14)- Réinitialiser le compteur de lettres trouvées
 	cptLettresTrouvées = 0;
+	//10-c- Réinitialiser le div qui va contenir le pendu
+	imgPendu.className = '';
+	//10-d- Ajouter la classe qui va afficher l'image du pendu en fonction du nombre d'erreurs
+	imgPendu.classList.add('etat' + cptErreur);
 	//4e- Réinitialiser le div qui va contenir le mot à trouver
 	wordToFindDiv.innerHTML = '';
 	// 4a- Déclarer var qui va contenir le mot à trouver
@@ -206,6 +211,10 @@ function generateKeyBoard() {
 				//8-d-6- Afficher ds le span le compteur d'erreurs
 				//document.getElementById('cptErreur').innerHTML = cptErreur;
 				cptErreurDiv.innerHTML = cptErreur;
+				//10-a- Réinitialiser le div qui va contenir le pendu
+				imgPendu.className = '';
+				//10-b- Ajouter la classe qui va afficher l'image du pendu en fonction du nombre d'erreurs
+				imgPendu.classList.add('etat' + cptErreur);
 				//8-d-11- On gère le nombre d'erreurs
 				if (cptErreur >= 4) {
 					//8-d-12- Si le compteur d'erreurs est supérieur ou égal à 4, on affiche le message de défaite
