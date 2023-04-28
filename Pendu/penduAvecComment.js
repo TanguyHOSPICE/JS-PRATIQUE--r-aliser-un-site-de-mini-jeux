@@ -2,9 +2,11 @@
 TODO #4:
   X-Générer 1 mot aléatoire
   X-Afficher le mot à deviner en masqué_ _ _ _ _ _
-  -Pouvoir proposer des lettres
-  -Afficher les lettres proposées/trouvées
-  -Gérer le nb d'erreurs max
+  X-Pouvoir proposer des lettres
+  X-Afficher les lettres proposées/trouvées
+  X-Gérer le nb d'erreurs max
+  -Gérer la victoire
+  
 */
 //import des librairies
 import { Utils } from '../Lib/Utils/utils.js';
@@ -40,10 +42,12 @@ const allWords = [
 ];
 const wordToFindDiv = document.getElementById('wordToFindDiv'); //4b
 const KeyBoardDiv = document.getElementById('KeyBoard'); //8b
+const cptErreurDiv = document.getElementById('cptErreur'); //8d-16
 
 let wordToFind; // 4a-
 let wordToFindArray = []; //4c
 let cptErreur = 0; //8d
+let cptLettresTrouvées = 0; //8d-14
 
 //3-eventListener sur le bouton pour démarrer le jeu
 btnPlay.addEventListener('click', function () {
@@ -54,6 +58,8 @@ btnPlay.addEventListener('click', function () {
 function initGame() {
 	//4g(8d)- Réinitialiser le compteur d'erreur
 	cptErreur = 0;
+	//4g(8d-14)- Réinitialiser le compteur de lettres trouvées
+	cptLettresTrouvées = 0;
 	//4e- Réinitialiser le div qui va contenir le mot à trouver
 	wordToFindDiv.innerHTML = '';
 	// 4a- Déclarer var qui va contenir le mot à trouver
@@ -171,20 +177,32 @@ function generateKeyBoard() {
 					if (td.dataset.letter == letter) {
 						//8-d-10- On affiche la lettre ds le mot
 						td.innerHTML = letter;
+						//8-d-14- On incrémente le compteur de lettres trouvées
+						cptLettresTrouvées++;
 					}
 				});
 				//E-----------------------------E//
+				//8-d-15- On vérifie si le nombre de lettres trouvées est égal au nombre de lettres du mot à trouver (taille du tableau)
+				if (cptLettresTrouvées == wordToFindArray.length) {
+					//8-d-16- On réinitialise le compteur de lettres trouvées
+					cptLettresTrouvées = 0;
+
+					//8-d-17- Si oui, on affiche le message de victoire
+					//document.getElementById('cptErreur').innerHTML = 'Gagné, vous avez trouvé le mot.';
+					cptErreurDiv.innerHTML = `Gagné, vous avez trouvé le mot en ${cptErreur} coup(s).`;
+				}
 			} else {
 				//8-d-3- Si non, afficher le pendu => incrémenter le compteur d'erreurs
 				//8-d-5- Incrémenter le compteur d'erreurs
 				cptErreur++;
 				//8-d-6- Afficher ds le span le compteur d'erreurs
-				document.getElementById('cptErreur').innerHTML = cptErreur;
+				//document.getElementById('cptErreur').innerHTML = cptErreur;
+				cptErreurDiv.innerHTML = cptErreur;
 				//8-d-11- On gère le nombre d'erreurs
 				if (cptErreur >= 4) {
 					//8-d-12- Si le compteur d'erreurs est supérieur ou égal à 4, on affiche le message de défaite
-					document.getElementById('cptErreur').innerHTML =
-						'Perdu, vous avez fait plus de 4 erreurs.';
+					//document.getElementById('cptErreur').innerHTML ='Perdu, vous avez fait plus de 4 erreurs.';
+					cptErreurDiv.innerHTML = 'Perdu, vous avez fait plus de 4 erreurs.';
 					//v-----------------------------v//
 					//8-d-13- On affiche le mot à trouver
 					let lineWord = document.getElementById('LineOfWord');
@@ -195,6 +213,8 @@ function generateKeyBoard() {
 							td.innerHTML = td.dataset.letter;
 						}
 					});
+					//8-d-14- On vide le clavier
+					KeyBoardDiv.innerHTML = '';
 					//E-----------------------------E//
 				}
 			}

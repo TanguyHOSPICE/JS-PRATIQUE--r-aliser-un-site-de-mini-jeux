@@ -104,7 +104,8 @@ function generateKeyBoard() {
 
 				if (cptLettreTrouvees == wordToFindArray.length) {
 					KeyBoardDiv.innerHTML = '';
-					cptErreurDiv.innerHTML = 'Gagné, avec ' + cptErreur + ' erreur(s)';
+					cptErreurDiv.innerHTML = `Gagné, vous avez trouvé le mot en ${cptErreur} coup(s).`;
+
 					Confetti.launchAnimationConfeti();
 					setTimeout(() => {
 						Confetti.stopAnimationConfeti();
