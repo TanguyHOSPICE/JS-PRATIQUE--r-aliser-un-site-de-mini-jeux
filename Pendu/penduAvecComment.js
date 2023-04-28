@@ -9,6 +9,7 @@ TODO #4:
   
 */
 //import des librairies
+import { Confetti } from '../Lib/confetti.js';
 import { Utils } from '../Lib/Utils/utils.js';
 
 //1-Déclarer var pour démarrer le jeu
@@ -56,6 +57,8 @@ btnPlay.addEventListener('click', function () {
 
 //4- fonction : Démarrer le jeu
 function initGame() {
+	//4i(8d-17)- Réinitialiser Confetti
+	Confetti.stopAnimationConfeti();
 	//4g(8d)- Réinitialiser le compteur d'erreur
 	cptErreur = 0;
 	//4g(8d-14)- Réinitialiser le compteur de lettres trouvées
@@ -184,12 +187,17 @@ function generateKeyBoard() {
 				//E-----------------------------E//
 				//8-d-15- On vérifie si le nombre de lettres trouvées est égal au nombre de lettres du mot à trouver (taille du tableau)
 				if (cptLettresTrouvées == wordToFindArray.length) {
-					//8-d-16- On réinitialise le compteur de lettres trouvées
-					cptLettresTrouvées = 0;
+					//8-d-16- On réinitialise le compteur de claviers
+					KeyBoardDiv.innerHTML = '';
 
 					//8-d-17- Si oui, on affiche le message de victoire
 					//document.getElementById('cptErreur').innerHTML = 'Gagné, vous avez trouvé le mot.';
-					cptErreurDiv.innerHTML = `Gagné, vous avez trouvé le mot en ${cptErreur} coup(s).`;
+					cptErreurDiv.innerHTML = `Gagné, vous avez trouvé le mot en ${cptErreur} erreur(s).`;
+					//8-d-18- Confettis
+					Confetti.launchAnimationConfeti();
+					setTimeout(() => {
+						Confetti.stopAnimationConfeti();
+					}, 5000);
 				}
 			} else {
 				//8-d-3- Si non, afficher le pendu => incrémenter le compteur d'erreurs
